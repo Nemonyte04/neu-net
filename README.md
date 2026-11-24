@@ -7,3 +7,4 @@ Neural network only using numpy in python under a 100 lines of code
 ### Usage:
 - Clone the repo, pip install -r requirements.txt, then run main.py. 
 - Make changes to the train-tes pipeline on main.py, changes to the network on neuron.py
+- One of the network implementations has Adam optimizer in the last 2 layers, while the other is simple SGD

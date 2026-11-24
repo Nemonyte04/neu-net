@@ -3,7 +3,9 @@ from neuron import layer
 import numpy as np
 import numpy.typing as npt
 import math
-from neuron import network
+
+# from neuron import network uncomment this if you want to try without the optimizer
+from network_w_adam import network #this is for the adam optizer hybrid with sgd
 from sklearn.datasets import fetch_openml
 import matplotlib.pylab as plt
 from sklearn.model_selection import train_test_split
@@ -38,15 +40,21 @@ plt.show()
 #i still need to build an optimizer
 print("-----Start training------")
 
+
+# output, layer_1_output, layer_2_output = nn.feed_fwd(x_train[0])
+# layer_1_gradient, layer_2_gradient, output_gradient = nn.backprop(output,layer_1_output, layer_2_output, y_train[0],x_train[0])
+# nn.update_params(grad1=layer_1_gradient, grad2=layer_2_gradient,outputgrad=output_gradient,lr=0.02)
 nn = network(x_train[0])
 epoch = 0
+run = 0
 while epoch < 5:
+    run += 1
     print("Epoch:", epoch)
     x_train, y_train = shuffle(x_train,y_train)
     for idx, data in enumerate(x_train):
         output, layer_1_output, layer_2_output = nn.feed_fwd(data)
         layer_1_gradient, layer_2_gradient, output_gradient = nn.backprop(output,layer_1_output, layer_2_output, y_train[idx],data)
-        nn.update_params(grad1=layer_1_gradient, grad2=layer_2_gradient,outputgrad=output_gradient,lr=0.02)
+        nn.update_params(grad1=layer_1_gradient, grad2=layer_2_gradient,outputgrad=output_gradient,run = run, lr=0.001 )
     epoch +=1
 
 predictions = []

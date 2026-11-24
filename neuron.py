@@ -31,7 +31,8 @@ class layer:
         self.neurons = np.array([None]*nodes)
         for i in range(nodes):
             self.neurons[i] = neuron(weights[i])
-            
+        self.m = np.array((nodes,inp_size))
+        self.v = np.array((nodes,inp_size))
     def regress(self,inp):
 
         inp = np.insert(inp,0,1)
@@ -101,6 +102,7 @@ class network:
         self.output_layer.update_weights(
             self.output_layer.get_weights() - (lr * outputgrad)
         )
+
         self.layer_2.update_weights(
                     self.layer_2.get_weights() - (lr * grad2)
                 )

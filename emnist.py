@@ -15,4 +15,4 @@ y_train = train.targets.numpy() - 1
 X_test = test.data.numpy().reshape(-1, 784) / 255.0
 y_test = test.targets.numpy() - 1
 
-print(max(y_train))
+print(X_train.shape)
